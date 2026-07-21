@@ -863,7 +863,8 @@
   .registration-frame iframe{display:block;width:100%;height:100%;border:0;border-radius:14px;}
   body.modal-open{overflow:hidden;}
   .motion-ready .reveal-left,
-  .motion-ready .reveal-right{
+  .motion-ready .reveal-right,
+  .motion-ready .reveal-up{
     opacity:0;
     transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);
     will-change:opacity,transform;
@@ -871,14 +872,17 @@
   .presenter{overflow:hidden;}
   .motion-ready .reveal-left{transform:translateX(-34px);}
   .motion-ready .reveal-right{transform:translateX(34px);}
+  .motion-ready .reveal-up{transform:translateY(28px);}
   .motion-ready .reveal-left.is-visible,
-  .motion-ready .reveal-right.is-visible{
+  .motion-ready .reveal-right.is-visible,
+  .motion-ready .reveal-up.is-visible{
     opacity:1;
     transform:translateX(0);
   }
   @media(prefers-reduced-motion:reduce){
     .motion-ready .reveal-left,
-    .motion-ready .reveal-right{
+    .motion-ready .reveal-right,
+    .motion-ready .reveal-up{
       opacity:1;
       transform:none;
       transition:none;
@@ -1459,7 +1463,33 @@ document.querySelectorAll('.video-thumb').forEach(btn=>{
   });
 });
 
-const revealItems = document.querySelectorAll('.reveal-left, .reveal-right');
+// Carry the same calm reveal language through the entire page. The hero copy
+// remains first in the visual sequence, followed by the story image and each
+// section's supporting content as it enters the viewport.
+const motionGroups = [
+  ['.hero-copy', '.hero-photo-wrap'],
+  ['.problem-section .section-title', '.problem-section .section-subtitle', '.problem-section .card'],
+  ['.testimonials h2', '.testimonial-intro', '.video-card', '.testimonial-cta'],
+  ['.approach-graphic', '.approach-mobile > h2', '.approach-mobile > p', '.mobile-fundamental', '.approach-mobile > .btn'],
+  ['.success-section .section-title', '.success-section .section-subtitle'],
+  ['.google-reviews .section-title', '.google-reviews .section-subtitle', '.review-card'],
+  ['.faq .section-title', '.faq .section-subtitle', '.faq-item', '.faq-cta'],
+  ['.footer-cta h2', '.footer-cta p', '.footer-cta .btn']
+];
+
+motionGroups.forEach((selectors, groupIndex)=>{
+  selectors.forEach((selector, selectorIndex)=>{
+    document.querySelectorAll(selector).forEach((item, itemIndex)=>{
+      if (!item.classList.contains('reveal-left') && !item.classList.contains('reveal-right')) {
+        item.classList.add('reveal-up');
+      }
+      const step = Math.min((selectorIndex + itemIndex) * 70, 280);
+      item.style.transitionDelay = step + 'ms';
+    });
+  });
+});
+
+const revealItems = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
 if ('IntersectionObserver' in window && revealItems.length){
   document.body.classList.add('motion-ready');
   const revealObserver = new IntersectionObserver((entries)=>{
