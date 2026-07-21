@@ -144,11 +144,45 @@
     border-radius:50%;
     background:var(--blue-mid);
   }
+  .hero-event{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:fit-content;
+    margin:0 0 18px;
+    padding:13px 18px 13px 15px;
+    border:1px solid #cfe1f7;
+    border-radius:10px;
+    background:#eaf4ff;
+    box-shadow:0 5px 16px rgba(31,91,154,.08);
+  }
+  .hero-event svg{
+    flex:0 0 31px;
+    width:31px;
+    height:31px;
+    color:var(--blue-mid);
+  }
+  .hero-event-date{
+    color:var(--navy);
+    font-size:18px;
+    font-weight:800;
+    line-height:1.1;
+    letter-spacing:.025em;
+    text-transform:uppercase;
+  }
+  .hero-event-time{
+    margin-top:4px;
+    color:#40566f;
+    font-size:14px;
+    font-weight:700;
+    line-height:1.25;
+    text-transform:uppercase;
+  }
   .hero .btn{padding:18px 36px;font-size:15px;border-radius:6px;}
   .cta-reassurance{
     margin-top:12px;
     color:#536273;
-    font-size:12px;
+    font-size:13px;
     font-weight:600;
   }
   .hero-photo-wrap{
@@ -1069,6 +1103,9 @@
     .hero h1{font-size:clamp(31px,9.5vw,36px);}
     .hero p.desc{font-size:15.5px;}
     .hero-benefits li{font-size:14px;}
+    .hero-event{width:100%;max-width:390px;padding:12px 14px;}
+    .hero-event-date{font-size:17px;}
+    .hero-event-time{font-size:13px;}
     .hero-photo-wrap img{height:clamp(320px,105vw,370px);}
     .hero-story-quote{padding:16px 16px 15px 44px;}
     .card,.review-card{padding:24px 20px;}
@@ -1096,8 +1133,19 @@
         <li>Inflammation, gut health, and nutrients</li>
         <li>Nervous system regulation and function</li>
       </ul>
+      <div class="hero-event" aria-label="Webinar date and time: Tuesday, July 28 at 7 PM Central, live online">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="4" y="7" width="24" height="21" rx="3"></rect>
+          <path d="M10 4v6M22 4v6M4 13h24"></path>
+          <path d="M10 18h4M18 18h4M10 23h4M18 23h4"></path>
+        </svg>
+        <div>
+          <div class="hero-event-date">Tuesday, July 28</div>
+          <div class="hero-event-time">7:00 PM Central &bull; Live Online</div>
+        </div>
+      </div>
       <a href="#register" class="btn">SAVE MY FREE SEAT</a>
-      <div class="cta-reassurance">Free Registration &bull; Live Online &bull; July 28 at 7:00 PM Central</div>
+      <div class="cta-reassurance">Free registration &bull; Approximately 60 minutes</div>
     </div>
     <figure class="hero-photo-wrap">
       <img src="assets/april-header-high-quality.png" alt="April sharing her recovery story">
